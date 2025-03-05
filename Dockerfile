@@ -1,14 +1,14 @@
 FROM grafana/loki:latest
 
-# Copy the configuration file
-COPY loki-config.yml /etc/loki/config.yml
+# Copy a custom Loki configuration file
+COPY loki-config.yml /etc/loki/loki-config.yml
 
 # Create necessary directories
-RUN mkdir -p /loki/chunks /loki/rules /loki/index /loki/cache /loki/compactor
+RUN mkdir -p /loki/chunks /loki/rules /loki/compactor
 
-# Expose Loki's port
-EXPOSE 3100
+# Expose necessary ports
+EXPOSE 3100 9096
 
-# Start Loki with the configuration
+# Set the command to run Loki with the specified configuration
 ENTRYPOINT ["/usr/bin/loki"]
-CMD ["-config.file=/etc/loki/config.yml"]
+CMD ["-config.file=/etc/loki/loki-config.yml", "-config.expand-env=true"]
