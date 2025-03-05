@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command:
+      - "-config.file=/etc/loki/local-config.yaml"
+    volumes:
+      - loki-data:/loki
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+
+volumes:
+  loki-data:
