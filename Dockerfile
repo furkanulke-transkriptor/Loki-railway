@@ -4,7 +4,7 @@ FROM grafana/loki:latest
 COPY loki-config.yml /etc/loki/config.yml
 
 # Create necessary directories
-RUN mkdir -p /loki/chunks /loki/rules /loki/index /loki/cache
+RUN mkdir -p /loki/chunks /loki/rules /loki/index /loki/cache /loki/compactor
 
 # Expose Loki's port
 EXPOSE 3100
